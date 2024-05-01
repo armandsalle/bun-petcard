@@ -3,13 +3,15 @@
   "module": "packages/server/index.ts",
   "type": "module",
   "workspaces": [
-    "packages/frontend",
-    "packages/server"
+    "packages/*"
   ],
   "scripts": {
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build:front": "cd ./packages/frontend && bun run build",
+    "start": "cd ./packages/server && bun run start"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "latest",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/bun": "latest",
     "prettier": "^3.2.5",
