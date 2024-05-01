@@ -1,0 +1,16 @@
+{
+  "name": "petcard",
+  "module": "packages/server/index.ts",
+  "type": "module",
+  "workspaces": [
+    "packages/frontend",
+    "packages/server"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
