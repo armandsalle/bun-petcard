@@ -1,0 +1,18 @@
+meta {
+  name: create_family
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/api/family/new
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "bibou",
+    "id": 1
+  }
+}

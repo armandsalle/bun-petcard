@@ -1,11 +1,14 @@
+import { familyRouter } from "./routers/family-router"
 import { Hono } from "hono"
 import { serveStatic } from "hono/bun"
 import { logger } from "hono/logger"
+import { poweredBy } from "hono/powered-by"
 
 const app = new Hono()
 app.use(logger())
+app.use(poweredBy())
 
-const router = app.get("/api", (c) => c.text("Hello Bun!"))
+const router = app.basePath("/api").route("/family", familyRouter)
 
 app.get(
   "*",
@@ -28,4 +31,4 @@ Bun.serve({
   fetch: app.fetch,
 })
 
-export type Router = typeof router
+export type AppRouter = typeof router
