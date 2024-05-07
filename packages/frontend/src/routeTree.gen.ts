@@ -15,6 +15,8 @@ import { Route as AboutImport } from './routes/about'
 import { Route as FamilyImport } from './routes/_family'
 import { Route as IndexImport } from './routes/index'
 import { Route as FamilyFamilyImport } from './routes/_family.family'
+import { Route as FamilyFamilyNewImport } from './routes/_family.family.new'
+import { Route as FamilyFamilyIdImport } from './routes/_family.family.$id'
 
 // Create/Update Routes
 
@@ -38,6 +40,16 @@ const FamilyFamilyRoute = FamilyFamilyImport.update({
   getParentRoute: () => FamilyRoute,
 } as any)
 
+const FamilyFamilyNewRoute = FamilyFamilyNewImport.update({
+  path: '/new',
+  getParentRoute: () => FamilyFamilyRoute,
+} as any)
+
+const FamilyFamilyIdRoute = FamilyFamilyIdImport.update({
+  path: '/$id',
+  getParentRoute: () => FamilyFamilyRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -58,6 +70,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FamilyFamilyImport
       parentRoute: typeof FamilyImport
     }
+    '/_family/family/$id': {
+      preLoaderRoute: typeof FamilyFamilyIdImport
+      parentRoute: typeof FamilyFamilyImport
+    }
+    '/_family/family/new': {
+      preLoaderRoute: typeof FamilyFamilyNewImport
+      parentRoute: typeof FamilyFamilyImport
+    }
   }
 }
 
@@ -65,7 +85,9 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  FamilyRoute.addChildren([FamilyFamilyRoute]),
+  FamilyRoute.addChildren([
+    FamilyFamilyRoute.addChildren([FamilyFamilyIdRoute, FamilyFamilyNewRoute]),
+  ]),
   AboutRoute,
 ])
 

@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { api } from "@/lib/api"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { type FamilySchema, familySchema } from "@server/routers/family-router"
+import { Outlet } from "@tanstack/react-router"
 import { Controller, useForm } from "react-hook-form"
 
 export function CreateFamily() {
@@ -35,6 +36,7 @@ export function CreateFamily() {
 
   return (
     <div>
+      <Outlet />
       <Card>
         <CardHeader>
           <CardTitle>New family</CardTitle>

@@ -4,9 +4,7 @@ import { serveStatic } from "hono/bun"
 import { logger } from "hono/logger"
 import { poweredBy } from "hono/powered-by"
 
-const app = new Hono()
-app.use(logger())
-app.use(poweredBy())
+export const app = new Hono().use(logger()).use(poweredBy())
 
 const router = app.basePath("/api").route("/family", familyRouter)
 
@@ -25,10 +23,12 @@ app.get(
   }),
 )
 
+export type AppRouter = typeof router
+
 Bun.serve({
   port: process.env.PORT || 3000,
   hostname: "0.0.0.0",
   fetch: app.fetch,
 })
 
-export type AppRouter = typeof router
+console.log("Server running!")
